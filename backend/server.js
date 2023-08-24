@@ -10,6 +10,7 @@ const corsOptions = require("./config/corsOptions");
 const connectDB = require("./config/dbConnection");
 const mongoose = require("mongoose");
 const { logEvents, logger } = require("./middleware/logger");
+const userRoute = require("./routes/userRoutes");
 
 console.log(process.env.NODE_ENV);
 
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use("/", express.static(path.join(__dirname, "public")));
 
 app.use("/", require("./routes/root"));
+app.use("/users", userRoute);
 
 app.all("*", (req, res) => {
   res.status(404);
