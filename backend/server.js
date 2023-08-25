@@ -11,6 +11,7 @@ const connectDB = require("./config/dbConnection");
 const mongoose = require("mongoose");
 const { logEvents, logger } = require("./middleware/logger");
 const userRoute = require("./routes/userRoutes");
+const noteRoute = require("./routes/noteRoute");
 
 console.log(process.env.NODE_ENV);
 
@@ -27,6 +28,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
 
 app.use("/", require("./routes/root"));
 app.use("/users", userRoute);
+app.use("/notes", noteRoute);
 
 app.all("*", (req, res) => {
   res.status(404);
